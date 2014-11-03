@@ -26,6 +26,6 @@ def checkNumber(a):
 
 print "Logelei: \n"
 
-for i in range(10000, 99999):
+for i in range(10000, 49999):
     if checkNumber(i):
         print "gefunden:", i, "(=", 2*i, "/ 2)"
