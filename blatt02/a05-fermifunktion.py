@@ -12,7 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def fermi(E, T, kB=1.0, my=0.0):
-    return 1/(math.exp((E-my)/(kB*T))+1)
+    return 1/(np.exp((E-my)/(kB*T))+1)
 
 
 Emin, Emax = -10.0, 10.0
@@ -25,8 +25,7 @@ for i, temp in enumerate(temps):
 
     xVals = np.linspace(Emin, Emax, pointNum, endpoint=True)
 
-    fermiVec = np.vectorize(fermi)
-    yVals = fermiVec(xVals, temp)
+    yVals = fermi(xVals, temp)
 
     tempLabel = "T = " + str(temp)
     plt.plot(xVals, yVals, color=colors[i], label=tempLabel)
