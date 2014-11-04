@@ -23,9 +23,12 @@ def checkNumber(a):
 
     return digits.count(True) == 10
 
-
-print "Logelei: \n"
+# Anzahl gefundener Zahlen
+solutionCount = 0
 
 for i in range(10000, 49999):
     if checkNumber(i):
         print "gefunden:", i, "(=", 2*i, "/ 2)"
+        solutionCount += 1
+
+print "Gesamtanzahl gefundener Lösungen:", solutionCount
