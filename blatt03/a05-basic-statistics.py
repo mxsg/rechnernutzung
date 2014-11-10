@@ -48,6 +48,7 @@ print "unbiased sigma =", sigma(a)*np.sqrt(float(N)/float(N-1))
 # histogram data
 print "\n*==* histogram of data:"
 binValues, bins = np.bincount(a.astype(int)), np.arange(10)
+print bins
 print binValues
 
 # calculate mean and sigma from histogram and print
