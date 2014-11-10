@@ -47,10 +47,13 @@ print "unbiased sigma =", sigma(a)*np.sqrt(float(N)/float(N-1))
 
 # histogram data
 print "\n*==* histogram of data:"
-bins = np.bincount(a.astype(int))
-print bins
+binValues, bins = np.bincount(a.astype(int)), np.arange(10)
+print binValues
 
 # calculate mean and sigma from histogram and print
-binsMean = np.average(np.arange(10), weights=bins)
+binsMean = np.average(bins, weights=binValues)
+binsVariance = np.average((bins - binsMean)**2, weights=binValues)
+
 print "mean:", binsMean
-print "variance:", np.average((np.arange(10) - binsMean)**2, weights=bins) 
+print "variance:", binsVariance
+print "sigma:", np.sqrt(binsVariance)
