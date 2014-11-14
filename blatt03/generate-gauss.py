@@ -5,7 +5,7 @@
 # WS 2014/2015
 
 # Aufgabe 7
-# Fehlerfortpflanzung: Verhaeltnis von Zufallszahlen
+# Fehlerfortpflanzung: Verhältnis von Zufallszahlen
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,16 +13,14 @@ import matplotlib.pyplot as plt
 def normalDist(n, mean, sigma):
     return np.random.normal(mean, sigma, n)
 
-
-# generate some Gaussion distributed Data and save to file
-
+# distribution parameters
 n = 1000
 mu1, sigma1 = 1.5, 0.5
 mu2, sigma2 = 0.6, 0.15
 
-normal1 = normalDist(n, mu1, sigma1)
-normal2 = normalDist(n, mu2, sigma2)
+normal1 = np.random.normal(mu1, sigma1, n)
+normal2 = np.random.normal(mu2, sigma2, n)
 
-rdata = np.divide(normal1, normal2)
-
-np.savetxt('gaussian_numbers.dat', rdata)
+# create ratio distribution and save values to file
+data = np.divide(normal1, normal2)
+np.savetxt('gaussian_numbers.dat', data)
