@@ -8,8 +8,8 @@ Skalarprodukt[v_, w_] := Sum[v[[i]]*w[[i]], {i, 3}]
 (* Kreuzprodukt mit Levi-Civita-Tensor: Komponenten mit Table in *)
 (* Mathematica-Vektor, dann auspacken und in vec[...] stecken *)
 Kreuzprodukt[v_,w_]:= Module[{l},
-l = Table[Sum[LeviCivitaTensor[3][[k,i,j]]*v[[i]]*w[[j]], {i,3}, {j,3}], {k,3}];
-vec[l[[1]],l[[2]],l[[3]]]
+    l = Table[Sum[LeviCivitaTensor[3][[k,i,j]]*v[[i]]*w[[j]], {i,3}, {j,3}], {k,3}];
+    vec[l[[1]],l[[2]],l[[3]]]
 ]
 Kreuzprodukt[vec[a1,a2,a3],vec[b1,b2,b3]]
 
@@ -19,7 +19,8 @@ a = vec[a1,a2,a3]; b=vec[b1,b2,b3]; c=vec[c1,c2,c3];
 
 
 (* Zyklische Invarianz des Kreuzprodukts testen *)
-Simplify[Skalarprodukt[a, Kreuzprodukt[b,c]]] === Simplify[Skalarprodukt[c, Kreuzprodukt[a,b]]]
+Simplify[Skalarprodukt[a, Kreuzprodukt[b,c]]] 
+    === Simplify[Skalarprodukt[c, Kreuzprodukt[a,b]]]
 
 
 (* BAC-CAB-Regel *)
