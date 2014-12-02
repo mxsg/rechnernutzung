@@ -80,8 +80,9 @@ Show[ListPlot[Table[gInt3[n], {n, 1, 8}], PlotStyle->Black], Plot[nInt3, {n, 0, 
 
 (* Aufgabe 12c) *)
 
-(* Datei einlesen *)
-<< "/Users/msg/studium/rechnernutzung/blatt06/ortho.m"
+(* Datei einlesen, zuerst Verzeichnis der Datei setzen *)
+SetDirectory[NotebookDirectory[]];
+<< "ortho.m"
 
 wOrthoM[x_] := gewichtPP[x]
 
