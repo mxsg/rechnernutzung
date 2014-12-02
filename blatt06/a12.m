@@ -1,18 +1,18 @@
 (* ::Package:: *)
 
-GaussIntegration[f_, trans_, a_, b_, poly_, w_, n_] := Module[{normn, ftilde, xk, coeff, Gk},
+GaussIntegration[f_, trans_, a_, b_, poly_, w_, n_] := Module[{norm, ftilde, xk, coeff, Gk, normpoly},
 	(* Polynom-Normierung *)
-	normn = NIntegrate[poly[n,x]^2*w[x], {x, a, b}];
+	norm[ord_] := NIntegrate[poly[ord,x]^2*w[x], {x, a, b}];
 	ftilde[x_] := f[trans[x]]*(D[trans[z],z]/.z->x)/w[trans[x]];
 	(* Nullstellen bestimmen *)
 	xk = x /. NSolve[poly[n,x]==0,x];
+	normpoly[nn_, x_] := poly[nn, x]/Sqrt[norm[nn]];
 	(* fuehrende Koeffizienten *)
-	coeff[j_] := Coefficient[poly[j, x], x, j];
-	Gk[k_] := coeff[n]/(coeff[n-1]*(D[poly[n,x],x]/.x->xk[[k]])*poly[n-1,xk[[k]]] / normn);
+	coeff[j_] := Coefficient[normpoly[j, x], x, j];
+	Gk[k_] := coeff[n]/(coeff[n-1]*(D[normpoly[n,x],x]/.x->xk[[k]])*normpoly[n-1,xk[[k]]]);
 	(* numerisches Ergebnis *)
 	N[Sum[Gk[k]*ftilde[xk[[k]]], {k, n}]]
 ]
-
 
 
 (* Aufgabe 12a) *)
