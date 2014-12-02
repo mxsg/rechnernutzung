@@ -2,11 +2,11 @@
 
 GaussIntegration[f_, trans_, a_, b_, poly_, w_, n_] := Module[{norm, ftilde, xk, coeff, Gk, normpoly},
 	(* Polynom-Normierung *)
-	norm[ord_] := NIntegrate[poly[ord,x]^2*w[x], {x, a, b}];
+	norm[k_] := NIntegrate[poly[k,x]^2*w[x], {x, a, b}];
 	ftilde[x_] := f[trans[x]]*(D[trans[z],z]/.z->x)/w[trans[x]];
 	(* Nullstellen bestimmen *)
 	xk = x /. NSolve[poly[n,x]==0,x];
-	normpoly[nn_, x_] := poly[nn, x]/Sqrt[norm[nn]];
+	normpoly[k_, x_] := poly[k, x]/Sqrt[norm[k]];
 	(* fuehrende Koeffizienten *)
 	coeff[j_] := Coefficient[normpoly[j, x], x, j];
 	Gk[k_] := coeff[n]/(coeff[n-1]*(D[normpoly[n,x],x]/.x->xk[[k]])*normpoly[n-1,xk[[k]]]);
@@ -16,7 +16,6 @@ GaussIntegration[f_, trans_, a_, b_, poly_, w_, n_] := Module[{norm, ftilde, xk,
 
 
 (* Aufgabe 12a) *)
-
 
 (* transformiert Def.bereich der zu integrierenden Funktion auf [-1,1] *)
 trans[x_, a_, b_] := (b-a)/2*x+(a+b)/2
@@ -75,7 +74,6 @@ nInt3 = NIntegrate[f3[x], {x, 0, Infinity}]
 (* Plot f1 *)
 Show[ListPlot[Table[gInt3[n], {n, 1, 8}], PlotStyle->Black], Plot[nInt3, {n, 0, 8}, PlotStyle->Blue],
 	PlotRange->{{0, 8}, {0, 2}}, AxesOrigin->{0,0}]
-
 
 
 (* Aufgabe 12c) *)
