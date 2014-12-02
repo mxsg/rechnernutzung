@@ -45,14 +45,14 @@ nInt2 = NIntegrate[f2[x], {x, 0, 1}]
 
 (* Plotten *)
 (* f1 *)
-Show[ListPlot[Table[gInt1[n], {n, 1, 8}]], Plot[nInt1, {n, 0, 8}, PlotStyle->Blue], 
-	PlotRange->{{0, 8}, {0, 6}}]
+Show[ListPlot[Table[gInt1[n], {n, 1, 8}], PlotStyle->Black], Plot[nInt1, {n, 0, 8}, PlotStyle->Blue],
+	PlotRange->{{0, 8}, {0, 7}}, AxesOrigin->{0,0}]
 
 
 
-(* f1 *)
-Show[ListPlot[Table[gInt2[n], {n, 1, 8}]], Plot[nInt2, {n, 0, 8}, PlotStyle->Blue], 
-	PlotRange->{{0, 8}, {0, 6}}]
+(* f2 *)
+Show[ListPlot[Table[gInt2[n], {n, 1, 8}], PlotStyle->Black], Plot[nInt2, {n, 0, 8}, PlotStyle->Blue],
+	PlotRange->{{0, 8}, {0, 6}}, AxesOrigin->{0,0}]
 
 
 (* Aufgabe 12b) *)
@@ -73,8 +73,8 @@ nInt3 = NIntegrate[f3[x], {x, 0, Infinity}]
 
 
 (* Plot f1 *)
-Show[ListPlot[Table[gInt3[n], {n, 1, 8}]], Plot[nInt3, {n, 0, 8}, PlotStyle->Blue], 
-	PlotRange->{{0, 8}, {0, 2}}]
+Show[ListPlot[Table[gInt3[n], {n, 1, 8}], PlotStyle->Black], Plot[nInt3, {n, 0, 8}, PlotStyle->Blue],
+	PlotRange->{{0, 8}, {0, 2}}, AxesOrigin->{0,0}]
 
 
 
@@ -94,5 +94,6 @@ nInt3
 
 
 (* Plot f3 (mit Polynomen aus c) *)
-Show[ListPlot[Table[gInt3c[n], {n, 1, 8}]], Plot[nInt3, {n, 0, 8}, PlotStyle->Blue], 
-	PlotRange->{{0, 8}, {0, 2}}, AxesOrigin->{0,0}]
+Show[ListPlot[Table[gInt3c[n], {n, 1, 8}], PlotStyle->Black],
+	ListPlot[Table[gInt3[n], {n, 1, 8}], PlotStyle->Red],
+	Plot[nInt3, {n, 0, 8}, PlotStyle->Blue], PlotRange->{{0, 8}, {0, 2}}, AxesOrigin->{0,0}]
