@@ -28,11 +28,11 @@ f2[x_]:=(((1-Sin[x])^2+Cos[x])^2-Sin[x])^2
 trans2[x_] := trans[x, 0, 1]
 
 (* Bei Legendre-Polynomen ist die Gewichtung =1 *)
-w[x_] := 1
+wLegendre[x_] := 1
 
 (* integriere mit Gauss-Quadratur *)
-gInt1[n_] := GaussIntegration[f1, trans1, -1, 1, LegendreP, w, n]
-gInt2[n_] := GaussIntegration[f2, trans2, -1, 1, LegendreP, w, n]
+gInt1[n_] := GaussIntegration[f1, trans1, -1, 1, LegendreP, wLegendre, n]
+gInt2[n_] := GaussIntegration[f2, trans2, -1, 1, LegendreP, wLegendre, n]
 
 gInt1[10]
 gInt2[10]
@@ -62,10 +62,9 @@ f3[x_] := Exp[-x^2]*(Sin[x+1]+Cos[x])/(1+x^2)
 
 (* mit den Laguerre-Polynomen ist keine Transformation notwendig *)
 trans3[x_] := x
-w[x_] := Exp[-x]
+wLaguerre[x_] := Exp[-x]
 
-gInt3[n_] := GaussIntegration[f3, trans3, 0, Infinity, LaguerreL, w, n]
-
+gInt3[n_] := GaussIntegration[f3, trans3, 0, Infinity, LaguerreL, wLaguerre, n]
 gInt3[10]
 
 
@@ -84,10 +83,9 @@ Show[ListPlot[Table[gInt3[n], {n, 1, 8}]], Plot[nInt3, {n, 0, 8}, PlotStyle->Blu
 (* Datei einlesen *)
 << "/Users/msg/studium/rechnernutzung/blatt06/ortho.m"
 
-w[x_] := gewichtPP[x]
+wOrthoM[x_] := gewichtPP[x]
 
-gInt3c[n_] := GaussIntegration[f3, trans3, 0, Infinity, PP, w, n]
-
+gInt3c[n_] := GaussIntegration[f3, trans3, 0, Infinity, PP, wOrthoM, n]
 gInt3c[8]
 
 
