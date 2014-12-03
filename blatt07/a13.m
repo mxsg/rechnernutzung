@@ -21,8 +21,11 @@ solution[V1_] := ParametricNDSolve[
 
 Psi0 = Psi /. solution[0];
 
-Plot[Evaluate[Table[Psi0[Energie][x], {Energie, 0.75, 5, .5}]], {x, -1, 1},
- PlotRange -> All]
+EnRange0 = Range[0.75, 5, .5];
+Plot[Evaluate[Table[Psi0[Energie][x], {Energie, EnRange0}]], {x, -1, 1},
+ PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRange0)]
+(* StringForm formatiert String in angegebener Form,
+   hier als anonyme Funktion (&) und mit Map (/@), um jeden Wert einzeln zu formatieren *)
 
 
 E0start = 1.25;
@@ -43,8 +46,9 @@ N[hbar^2*Pi^2/(2*m*L^2)*2^2]
 
 Psip30 = Psi /. solution[30];
 
-Plot[Evaluate[Table[Psip30[Energie][x], {Energie, 5, 7, .4}]], {x, -1, 1},
- PlotRange -> All]
+EnRangep30 = Range[5, 7, .4];
+Plot[Evaluate[Table[Psip30[Energie][x], {Energie, EnRangep30}]], {x, -1, 1},
+ PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRangep30)]
 
 
 E0start = 6.2;
@@ -57,16 +61,18 @@ Ep301 = Energie /. FindRoot[Psip30[Energie][1]==0, {Energie, E1start}]
 
 Psim30 = Psi /. solution[-30];
 
-Plot[Evaluate[Table[Psi[Energie][x] /. solution[-30], {Energie, -21.73, -21.7, .005}]],
-	{x, -1, 1}, PlotRange -> All]
+EnRangem300 = Range[-21.73, -21.7, .005];
+Plot[Evaluate[Table[Psi[Energie][x] /. solution[-30], {Energie, EnRangem300}]],
+	{x, -1, 1}, PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRangem300)]
 
 
 E0start = -21.715;
 Em300 = Energie /. FindRoot[Psim30[Energie][1]==0, {Energie, E0start}]
 
 
-Plot[Evaluate[Table[Psim30[Energie][x], {Energie, -3, -1.2, 0.3}]],
-	{x, -1, 1}, PlotRange -> All]
+EnRangem301 = Range[-3, -1.2, 0.3]
+Plot[Evaluate[Table[Psim30[Energie][x], {Energie, EnRangem301}]],
+	{x, -1, 1}, PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRangem301)]
 
 
 E1start = -2.1;
@@ -81,19 +87,22 @@ norm[psi_] := NIntegrate[Abs[psi[x]]^2, {x, -1, 1}]
 norm0 = Sqrt[norm[Psim30[Em300]]]
 norm1 = Sqrt[norm[Psim30[Em301]]]
 
-Plot[{Psim30[Em300][x]/norm0,Psim30[Em301][x]/norm1}, {x, -1, 1}]
+Plot[{Psim30[Em300][x]/norm0,Psim30[Em301][x]/norm1}, {x, -1, 1},
+	PlotLegends->(StringForm["E = ``", #]&/@{Em300, Em301})]
 
 
 norm0 = Sqrt[norm[Psi0[E00]]]
 norm1 = Sqrt[norm[Psi0[E01]]]
 
-Plot[{Psi0[E00][x]/norm0,Psi0[E01][x]/norm1}, {x, -1, 1}]
+Plot[{Psi0[E00][x]/norm0,Psi0[E01][x]/norm1}, {x, -1, 1},
+	PlotLegends->(StringForm["E = ``", #]&/@{E00, E01})]
 
 
 norm0 = Sqrt[norm[Psip30[Ep300]]]
 norm1 = Sqrt[norm[Psip30[Ep301]]]
 
-Plot[{Psip30[Ep300][x]/norm0,Psip30[Ep301][x]/norm1}, {x, -1, 1}]
+Plot[{Psip30[Ep300][x]/norm0,Psip30[Ep301][x]/norm1}, {x, -1, 1},
+	PlotLegends->(StringForm["E = ``", #]&/@{Ep300, Ep301})]
 
 
 
