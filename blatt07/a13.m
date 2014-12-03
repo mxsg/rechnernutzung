@@ -85,7 +85,7 @@ Plot[{Psim30[Em300][x]/norm0,Psim30[Em301][x]/norm1}, {x, -1, 1}]
 
 
 norm0 = Sqrt[norm[Psi0[E00]]]
-norm1 = Sqrt[norm[Psim30[E01]]]
+norm1 = Sqrt[norm[Psi0[E01]]]
 
 Plot[{Psi0[E00][x]/norm0,Psi0[E01][x]/norm1}, {x, -1, 1}]
 
