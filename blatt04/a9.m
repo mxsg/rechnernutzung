@@ -19,8 +19,7 @@ a = vec[a1,a2,a3]; b=vec[b1,b2,b3]; c=vec[c1,c2,c3];
 
 
 (* Zyklische Invarianz des Kreuzprodukts testen *)
-Simplify[Skalarprodukt[a, Kreuzprodukt[b,c]]] 
-    === Simplify[Skalarprodukt[c, Kreuzprodukt[a,b]]]
+Simplify[Skalarprodukt[a, Kreuzprodukt[b,c]]] === Simplify[Skalarprodukt[c, Kreuzprodukt[a,b]]]
 
 
 (* BAC-CAB-Regel *)
@@ -48,3 +47,6 @@ LinearAbhaengigQ[v1,v2,v3]
 
 
 Solve[(-e+f) (e f-e (-2 e+f))+e (-e^2-e (e+f))+e (e f+(-2 e+f) (e+f))==0,{e,f}]
+
+
+
