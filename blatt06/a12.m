@@ -64,7 +64,10 @@ trans3[x_] := x
 wLaguerre[x_] := Exp[-x]
 
 gInt3[n_] := GaussIntegration[f3, trans3, 0, Infinity, LaguerreL, wLaguerre, n]
-gInt3[10]
+
+(* Werte f\[UDoubleDot]r n=2, n=8 *)
+gInt3[2]
+gInt3[8]
 
 
 (* Vergleich mit numerischer Integration *)
@@ -85,6 +88,9 @@ SetDirectory[NotebookDirectory[]];
 wOrthoM[x_] := gewichtPP[x]
 
 gInt3c[n_] := GaussIntegration[f3, trans3, 0, Infinity, PP, wOrthoM, n]
+
+(* Werte f\[UDoubleDot]r n=2 und n=8 *)
+gInt3c[2]
 gInt3c[8]
 
 
