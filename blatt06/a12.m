@@ -84,6 +84,8 @@ Show[Plot[nInt3, {n, 0, 8}, PlotStyle->Black], ListPlot[Table[gInt3[n], {n, 1, 8
 (* Datei einlesen, zuerst Verzeichnis der Datei setzen *)
 SetDirectory[NotebookDirectory[]];
 << "ortho.m"
+(* hinterher Verzeichnis wieder zur\[UDoubleDot]cksetzen *)
+ResetDirectory[];
 
 wOrthoM[x_] := gewichtPP[x]
 
