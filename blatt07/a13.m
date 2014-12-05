@@ -128,4 +128,11 @@ plotp30 = Plot[{Psip30[Ep300][x]/norm0,Psip30[Ep301][x]/norm1}, {x, -1, 1},
 	AxesLabel->{x, Subscript[\[Psi],Energie][x]}]
 
 
+SetDirectory[NotebookDirectory[]];
+Export["plot-m30.pdf", plotm30]
+Export["plot-0.pdf", plot0]
+Export["plot-p30.pdf", plotp30]
+ResetDirectory[];
+
+
 
