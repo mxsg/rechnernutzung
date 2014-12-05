@@ -30,8 +30,8 @@ trans2[x_] := trans[x, 0, 1]
 wLegendre[x_] := 1
 
 (* integriere mit Gauss-Quadratur *)
-gInt1[n_] := GaussIntegration[f1, trans1, -1, 1, LegendreP, wLegendre, n]
-gInt2[n_] := GaussIntegration[f2, trans2, -1, 1, LegendreP, wLegendre, n]
+gInt1[n_] := gInt1[n] = GaussIntegration[f1, trans1, -1, 1, LegendreP, wLegendre, n]
+gInt2[n_] := gint2[n] = GaussIntegration[f2, trans2, -1, 1, LegendreP, wLegendre, n]
 
 gInt1[10]
 gInt2[10]
@@ -63,7 +63,7 @@ f3[x_] := Exp[-x^2]*(Sin[x+1]+Cos[x])/(1+x^2)
 trans3[x_] := x
 wLaguerre[x_] := Exp[-x]
 
-gInt3[n_] := GaussIntegration[f3, trans3, 0, Infinity, LaguerreL, wLaguerre, n]
+gInt3[n_] := gInt3[n] = GaussIntegration[f3, trans3, 0, Infinity, LaguerreL, wLaguerre, n]
 
 (* Werte f\[UDoubleDot]r n=2, n=8 *)
 gInt3[2]
@@ -89,7 +89,7 @@ ResetDirectory[];
 
 wOrthoM[x_] := gewichtPP[x]
 
-gInt3c[n_] := GaussIntegration[f3, trans3, 0, Infinity, PP, wOrthoM, n]
+gInt3c[n_] := gInt3c[n] = GaussIntegration[f3, trans3, 0, Infinity, PP, wOrthoM, n]
 
 (* Werte f\[UDoubleDot]r n=2 und n=8 *)
 gInt3c[2]
