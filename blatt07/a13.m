@@ -129,9 +129,9 @@ plotp30 = Plot[{Psip30[Ep300][x]/norm0,Psip30[Ep301][x]/norm1}, {x, -1, 1},
 
 
 SetDirectory[NotebookDirectory[]];
-Export["plot-m30.pdf", plotm30]
-Export["plot-0.pdf", plot0]
-Export["plot-p30.pdf", plotp30]
+Export["genplot-m30.pdf", plotm30]
+Export["genplot-0.pdf", plot0]
+Export["genplot-p30.pdf", plotp30]
 ResetDirectory[];
 
 
