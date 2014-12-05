@@ -53,10 +53,16 @@ N[hbar^2*Pi^2/(2*m*L^2)*2^2]
 Psip30 = Psi /. solution[30];
 
 EnRangep30 = Range[5, 7, .4];
-Plot[Evaluate[Table[Psip30[Energie][x], {Energie, EnRangep30}]], {x, -1, 1},
+plotSearchp30 = Plot[Evaluate[Table[Psip30[Energie][x], {Energie, EnRangep30}]], {x, -1, 1},
 	PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRangep30),
 	PlotLabel->"V = 30",
 	AxesLabel->{x, Subscript[\[Psi],Energie][x]}]
+
+
+(* Plot exportieren *)
+SetDirectory[NotebookDirectory[]];
+Export["genplot-search-p30.pdf", plotSearchp30]
+ResetDirectory[];
 
 
 E0start = 6.2;
