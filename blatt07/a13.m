@@ -108,8 +108,8 @@ norm0 = Sqrt[norm[Psim30[Em300]]]
 norm1 = Sqrt[norm[Psim30[Em301]]]
 
 plotm30 = Plot[{Psim30[Em300][x]/norm0,Psim30[Em301][x]/norm1}, {x, -1, 1},
-	PlotLegends->{StringForm["`` = ``", Subscript[energie,0], Em300],
-	StringForm["`` = ``", Subscript[energie,1], Em301]},
+	PlotLegends->{StringForm["`` = ``", Subscript[Energie,0], Em300],
+	StringForm["`` = ``", Subscript[Energie,1], Em301]},
 	PlotLabel->"V = -30",
 	AxesLabel->{x, Subscript[\[Psi],Energie][x]}]
 
@@ -118,8 +118,8 @@ norm0 = Sqrt[norm[Psi0[E00]]]
 norm1 = Sqrt[norm[Psi0[E01]]]
 
 plot0 = Plot[{Psi0[E00][x]/norm0,Psi0[E01][x]/norm1}, {x, -1, 1},
-	PlotLegends->{StringForm["`` = ``", Subscript[energie,0], E00],
-	StringForm["`` = ``", Subscript[energie,1], E01]},
+	PlotLegends->{StringForm["`` = ``", Subscript[Energie,0], E00],
+	StringForm["`` = ``", Subscript[Energie,1], E01]},
 	PlotLabel->"V = 0",
 	AxesLabel->{x, Subscript[\[Psi],Energie][x]}]
 
@@ -128,8 +128,8 @@ norm0 = Sqrt[norm[Psip30[Ep300]]]
 norm1 = Sqrt[norm[Psip30[Ep301]]]
 
 plotp30 = Plot[{Psip30[Ep300][x]/norm0,Psip30[Ep301][x]/norm1}, {x, -1, 1},
-	PlotLegends->{StringForm["`` = ``", Subscript[energie,0], Ep300],
-	StringForm["`` = ``", Subscript[energie,1], Ep301]},
+	PlotLegends->{StringForm["`` = ``", Subscript[Energie,0], Ep300],
+	StringForm["`` = ``", Subscript[Energie,1], Ep301]},
 	PlotLabel->"V = 30",
 	AxesLabel->{x, Subscript[\[Psi],Energie][x]}]
 
