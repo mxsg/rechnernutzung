@@ -19,11 +19,17 @@ solution[V1_] := ParametricNDSolve[
 	{SchrGl[En, x, V1], Psi[-1]==0, (D[Psi[x], x]/.x->-1)==1}, Psi, {x,-1, 1}, En]
 
 
+(* Buchstabe E f\[UDoubleDot]r Energie richtig darstellen *)
+Format[Energie, TraditionalForm] := "E"
+
+
 Psi0 = Psi /. solution[0];
 
 EnRange0 = Range[0.75, 5, .5];
 Plot[Evaluate[Table[Psi0[Energie][x], {Energie, EnRange0}]], {x, -1, 1},
- PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRange0)]
+	PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRange0),
+	PlotLabel->"V = 0",
+	AxesLabel->{x, Subscript[\[Psi],Energie][x]}]
 (* StringForm formatiert String in angegebener Form,
    hier als anonyme Funktion (&) und mit Map (/@), um jeden Wert einzeln zu formatieren *)
 
@@ -48,7 +54,9 @@ Psip30 = Psi /. solution[30];
 
 EnRangep30 = Range[5, 7, .4];
 Plot[Evaluate[Table[Psip30[Energie][x], {Energie, EnRangep30}]], {x, -1, 1},
- PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRangep30)]
+	PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRangep30),
+	PlotLabel->"V = 30",
+	AxesLabel->{x, Subscript[\[Psi],Energie][x]}]
 
 
 E0start = 6.2;
@@ -63,16 +71,21 @@ Psim30 = Psi /. solution[-30];
 
 EnRangem300 = Range[-21.73, -21.7, .005];
 Plot[Evaluate[Table[Psi[Energie][x] /. solution[-30], {Energie, EnRangem300}]],
-	{x, -1, 1}, PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRangem300)]
+	{x, -1, 1}, PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRangem300),
+	PlotLabel->"V = -30",
+	AxesLabel->{x, Subscript[\[Psi],Energie][x]}]
 
 
 E0start = -21.715;
 Em300 = Energie /. FindRoot[Psim30[Energie][1]==0, {Energie, E0start}]
 
 
-EnRangem301 = Range[-3, -1.2, 0.3]
+EnRangem301 = Range[-3, -1.2, 0.3];
+
 Plot[Evaluate[Table[Psim30[Energie][x], {Energie, EnRangem301}]],
-	{x, -1, 1}, PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRangem301)]
+	{x, -1, 1}, PlotRange -> All, PlotLegends->(StringForm["E = ``", #]&/@EnRangem301),
+	PlotLabel->"V = -30",
+	AxesLabel->{x, Subscript[\[Psi],Energie][x]}]
 
 
 E1start = -2.1;
@@ -84,25 +97,35 @@ Em301 = Energie /. FindRoot[Psim30[Energie][1]==0, {Energie, E1start}]
 (* Normierung der Wellenfunktion *)
 norm[psi_] := NIntegrate[Abs[psi[x]]^2, {x, -1, 1}]
 
+
 norm0 = Sqrt[norm[Psim30[Em300]]]
 norm1 = Sqrt[norm[Psim30[Em301]]]
 
-Plot[{Psim30[Em300][x]/norm0,Psim30[Em301][x]/norm1}, {x, -1, 1},
-	PlotLegends->(StringForm["E = ``", #]&/@{Em300, Em301})]
+plotm30 = Plot[{Psim30[Em300][x]/norm0,Psim30[Em301][x]/norm1}, {x, -1, 1},
+	PlotLegends->{StringForm["`` = ``", Subscript[energie,0], Em300],
+	StringForm["`` = ``", Subscript[energie,1], Em301]},
+	PlotLabel->"V = -30",
+	AxesLabel->{x, Subscript[\[Psi],Energie][x]}]
 
 
 norm0 = Sqrt[norm[Psi0[E00]]]
 norm1 = Sqrt[norm[Psi0[E01]]]
 
-Plot[{Psi0[E00][x]/norm0,Psi0[E01][x]/norm1}, {x, -1, 1},
-	PlotLegends->(StringForm["E = ``", #]&/@{E00, E01})]
+plot0 = Plot[{Psi0[E00][x]/norm0,Psi0[E01][x]/norm1}, {x, -1, 1},
+	PlotLegends->{StringForm["`` = ``", Subscript[energie,0], E00],
+	StringForm["`` = ``", Subscript[energie,1], E01]},
+	PlotLabel->"V = 0",
+	AxesLabel->{x, Subscript[\[Psi],Energie][x]}]
 
 
 norm0 = Sqrt[norm[Psip30[Ep300]]]
 norm1 = Sqrt[norm[Psip30[Ep301]]]
 
-Plot[{Psip30[Ep300][x]/norm0,Psip30[Ep301][x]/norm1}, {x, -1, 1},
-	PlotLegends->(StringForm["E = ``", #]&/@{Ep300, Ep301})]
+plotp30 = Plot[{Psip30[Ep300][x]/norm0,Psip30[Ep301][x]/norm1}, {x, -1, 1},
+	PlotLegends->{StringForm["`` = ``", Subscript[energie,0], Ep300],
+	StringForm["`` = ``", Subscript[energie,1], Ep301]},
+	PlotLabel->"V = 30",
+	AxesLabel->{x, Subscript[\[Psi],Energie][x]}]
 
 
 
