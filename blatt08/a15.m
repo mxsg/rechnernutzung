@@ -27,9 +27,11 @@ TestOrthonorm[nmax_, polySys_, g_, {x_, a_, b_}] :=
 VglMath[nmax_, polySys_, polyMath_, g_, {x_, a_, b_}] :=
 	Table[Simplify[polySys[n]/polyMath[n]], {n, 0, nmax}]
 
+nmax = 5;
+
 
 (* Legendre-Polynome *)
-gLeg[x] := 1; aLeg = -1; bLeg = 1; nmax = 5;
+gLeg[x] := 1; aLeg = -1; bLeg = 1;
 NLegendre[n_] := ONPoly[gLeg[x], n, {x, aLeg, bLeg}]
 
 Table[NLegendre[n], {n, 0, nmax}]
@@ -44,7 +46,7 @@ TestOrthonorm[5, NLegendre, gLeg, {x, aLeg, bLeg}]
 
 
 (* Chebyshev-Polynome *)
-gCheby[x] := 1/Sqrt[1-x^2]; aCheby = -1; bCheby = 1; nmax = 5;
+gCheby[x] := 1/Sqrt[1-x^2]; aCheby = -1; bCheby = 1;
 NChebyshev[n_] := ONPoly[gCheby[x], n, {x, aCheby, bCheby}]
 
 Table[NChebyshev[n], {n, 0, nmax}]
@@ -59,7 +61,7 @@ TestOrthonorm[5, NChebyshev, gCheby, {x, aCheby, bCheby}]
 
 
 (* Laguerre-Polynome *)
-gLag[x] := Exp[-x]; aLag = 0; bLag = Infinity; nmax = 5;
+gLag[x] := Exp[-x]; aLag = 0; bLag = Infinity;
 NLaguerre[n_] := ONPoly[gLag[x], n, {x, aLag, bLag}]
 
 Table[NLaguerre[n], {n, 0, nmax}]
@@ -74,7 +76,7 @@ TestOrthonorm[5, NLaguerre, gLag, {x, aLag, bLag}]
 
 
 (* Hermite-Polynome *)
-gHerm[x] := Exp[-x^2]; aHerm = -Infinity; bHerm = Infinity; nmax = 5;
+gHerm[x] := Exp[-x^2]; aHerm = -Infinity; bHerm = Infinity;
 NHermite[n_] := ONPoly[gHerm[x], n, {x, aHerm, bHerm}]
 
 Table[NHermite[n], {n, 0, nmax}]
@@ -89,7 +91,7 @@ TestOrthonorm[5, NHermite, gHerm, {x, aHerm, bHerm}]
 
 
 (* Q-Polynome *)
-gQ[x] := 1/(1+x^2); aQ = -1; bQ = 1; nmax = 5;
+gQ[x] := 1/(1+x^2); aQ = -1; bQ = 1;
 NQ[n_] := ONPoly[gQ[x], n, {x, aQ, bQ}]
 
 Table[NQ[n], {n, 0, nmax}]
