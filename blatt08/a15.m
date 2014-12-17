@@ -4,10 +4,10 @@ SkPr[Pn_, Pm_, g_, {x_, a_, b_}] := Integrate[Pn*Pm*g, {x, a, b}]
 
 
 (* Polynom 0. Ordnung ist konstant, aber normiert *)
-ONPoly[g_, 0, {x_, a_, b_}] := 1/Sqrt[SkPr[1, 1, g, {x, a, b}]]
+ONPoly[g_, 0, {x_, a_, b_}] := 1/Sqrt@SkPr[1, 1, g, {x, a, b}]
 (* h\[ODoubleDot]here Ordnungen werden nur einmal berechnet, dann gecachet *)
 ONPoly[g_, n_Integer?Positive, {x_, a_, b_}] :=
-ONPoly[g, n, {x, a, b}] = Module[{startPoly, projektion, Pnext, Polyi, PTilde},
+ONPoly[g, n, {x, a, b}] = Module[{Pnext, projektion, PTilde},
 	Pnext = x^n;
 
 	projektion =
