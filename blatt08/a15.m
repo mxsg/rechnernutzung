@@ -105,3 +105,14 @@ Table[NQ[n], {n, 0, nmax}]
 
 (* Orthonormierung \[UDoubleDot]berpr\[UDoubleDot]fen *)
 TestOrthonorm[5, NQ, gQ, {x, aQ, bQ}]
+
+
+(* Nullstellen der erzeugten Polynome berechnen *)
+zeros = Table[x /. NSolve[NQ[n]==0, x], {n, 1, nmax}]
+
+
+points = Flatten[Table[{i, zeros[[i, j]]}, {i, 1, nmax}, {j, 1, i}], 1]
+
+
+(* bestimmte Nullstellen plotten *)
+ListPlot[points, AxesOrigin->{0,0}]
