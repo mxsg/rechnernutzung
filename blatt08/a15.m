@@ -1,8 +1,5 @@
 (* ::Package:: *)
 
-ClearAll["Global`*"]
-
-
 SkPr[Pn_, Pm_, g_, {x_, a_, b_}] := Integrate[Pn*Pm*g, {x, a, b}]
 
 
