@@ -1,5 +1,6 @@
-# Aufgabenblätter ignorieren
+# Aufgabenblätter und Material ignorieren
 blatt*.pdf
+material/
 
 # generierte Plots
 genplot-*
