@@ -23,6 +23,7 @@
 #include "TStyle.h"
 #include "TText.h"
 #include <math.h>
+#include <iostream>
 
 void EventsPoisson();
 
@@ -128,7 +129,26 @@ void EventsPoisson() {
     poisson->Draw("same");
     canvas->SaveAs("genplot-bin-contents.pdf");
 
-    // TODO: part d): simulate detector that does not count all events,
-    // but misses events based on the time since the last detected event
-    // model this in a separate class?
+    // TODO: model this in a separate class
+    Double_t detEvents[N];
+    detEvents[0] = 0;
+    Int_t lastInd = 0;
+    Int_t NCorr = 1;
+
+    // TODO: make histogram with these detected events
+    // just tracking the number of detected events, there is no need
+    // to store all their timestamps
+    for(int i = 1; i < N; i++) {
+        Double_t tDiff = events[i] - events[lastInd];
+        // only count events with certain probability if tDiff is < 0.2
+        if(tDiff > 0.2 || gRandom->Rndm() < 5*tDiff) {
+            detEvents[NCorr] = detEvents[i];
+            lastInd = i;
+            NCorr++;
+        }
+    }
+
+    std::cout << "corrected event number: " << NCorr << std::endl;
+    std::cout << "uncorrected value: " << N << std::endl;
+    std::cout << "correction factor: " << NCorr/(Double_t)N << std::endl;
 }
