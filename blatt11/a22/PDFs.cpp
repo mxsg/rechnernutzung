@@ -224,7 +224,7 @@ void PDFs() {
 
     c->Update();
 
-    c->SaveAs("histograms.pdf");
+    c->SaveAs("genplot-histograms.pdf");
 
     // eventually, create a ROOT file.
     TFile hfile("pdfs.root","RECREATE","pdfs");
