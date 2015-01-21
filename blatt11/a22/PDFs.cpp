@@ -35,47 +35,52 @@
 #include <math.h>
 #include "TMath.h"
 
-// Function to generically implement the acceptance-rejection method. 
-void AcceptReject (TH1F *histo, Float_t (*f)(Float_t x,Float_t p), Float_t p,
-	    Float_t xmin, Float_t xmax, Float_t (*t)(Float_t u), int NumRand) {
-  /* transform uniform random numbers to numbers following a distribution
-   * described by f
-   * Input variables: 
-   * histo  : ID of histogram to fill
-   * f      : function the random numbers should follow
-   * p      : parameters of f
-   * xmin   : left border of interval
-   * xmax   : right border of interval
-   * t      : function used to transform uniform random numbers
-   * NumRand: number of random numbers to generate 
-   */
+
+/* Function to generically implement the acceptance-rejection method.
+ * Transform uniform random numbers to numbers following a distribution
+ * described by f.
+ *
+ * Input variables:
+ * histo:   ID of histogram to fill
+ * f:       function the random numbers should follow
+ * p:       parameters of f
+ * xmin:    left border of interval
+ * xmax:    right border of interval
+ * t: 	    function used to transform uniform random numbers
+ * NumRand: number of random numbers to generate
+ */
+void AcceptReject (TH1F *histo, Double_t (*f)(Double_t x, Double_t p), Double_t p,
+        Double_t xmin, Double_t xmax, Double_t (*t)(Double_t u), int NumRand) {
 
     // generate random numbers until enough numbers have been accepted
     int i = 0;
     while(i < NumRand) {
-        // generate (uniform) random numbers in interval [xmin, xmax]
-        Double_t randUniform = (xmax - xmin) * gRandom->Rndm() + xmin;
-        // do not transform numbers if transformation function is null pointer
-        Double_t randTransf = (t != nullptr) ? t(randUniform) : randUniform;
+        // generate (uniform) random numbers in interval (xmin, xmax)
+		Double_t rand = gRandom->Uniform(xmin, xmax);
 
-        // accept generated number with probability f(rand, p)
-        // TODO: use while loop inside for loop instead of while loop with outer index
-        if(gRandom->Rndm() < f(randTransf, p)) {
-            histo->Fill(randTransf);
+		// transform with function t, do not transform if null pointer is passed
+		if(t != nullptr) rand = t(rand);
+
+		// accept generated number with probability f(rand, p)
+        if(gRandom->Rndm() < f(rand, p)) {
+			// number has been accepted, put into histogram
+			// and increment count for accepted numbers
+            histo->Fill(rand);
             i++;
         }
     }
 }
 
-// functions:
-Float_t f1(Float_t x, Float_t p) {
+
+Double_t f1(Double_t x, Double_t p) {
     return (-1 <= x && x <= 1) ? p*(1 + TMath::Power(x, 2)) : 0;
 }
-Double_t f1(Double_t x[], Double_t par[]) {
+
+Double_t f1(Double_t *x, Double_t *par) {
     return f1(x[0], par[0]);
 }
 
-Float_t sin2(Float_t x, Float_t omega) {
+Double_t sin2(Double_t x, Double_t omega) {
     return x >= 0 ? TMath::Power(TMath::Sin(omega*x), 2) : 0;   
 } // exercise 3
 
@@ -84,11 +89,11 @@ Double_t sin2exp(Double_t *x, Double_t *par) {
 }
 
   // transformations of uniform random numbers
-Float_t transform_id(Float_t r) {
+Double_t transform_id(Double_t r) {
     return r;  // identity
 }
 
-Float_t transform_exp(Float_t r) {
+Double_t transform_exp(Double_t r) {
     //return 5./2.*TMath::Exp(-r);
     return -TMath::Log(r);
 } // exponential
@@ -103,8 +108,8 @@ int PDFs() {
 
   //------------------------------------------------------------------------
 
-  Float_t pi=TMath::Pi();
-  Float_t r=0.;
+  Double_t pi=TMath::Pi();
+  //Double_t r=0.;
 
   //------------------------------------------------------------------------
 
@@ -113,7 +118,7 @@ int PDFs() {
   TH1F *h100 = 
       new TH1F("h100", "distribution of random numbers", 50, -1, 1);
 
-  AcceptReject(h100, f1, 3./8., -1, 1, nullptr, 10000);
+  AcceptReject(h100, f1, 3./8., -1, 1, nullptr, NumRand);
 
   TF1 *f100 = new TF1("f1", f1, -1, 1, 1);
   // TODO: make this generic, factor out N and bin width
@@ -148,11 +153,11 @@ int PDFs() {
   //------------------------------------------------------------------------
 
 
-    int N4 = 20000; // number of random numbers to generate
+    int N4 = 10000; // number of random numbers to generate
 
   // Exercise 4: random sample from histogram
    // read histogram data from file
-  Float_t hdat[100]={};// an array of sufficient length, initialized to 0
+  Double_t hdat[100]={};// an array of sufficient length, initialized to 0
   std::ifstream inp;
   inp.open("elefant.dat");
   float x;  int i=0;
@@ -176,7 +181,7 @@ int PDFs() {
   // fit all data into histogram
   // CDFData[nbins-1] = 1;
 
-  TH1F *h400 = new TH1F("h400", "empiric distribution", nbins, 0, nbins);
+  TH1F *h400 = new TH1F("h400", "random numbers with empiric distribution", nbins, 0, nbins);
   TH1F *hElefant = new TH1F("hElefant", "empiric distribution", nbins, 0, nbins);
   for(int i = 0; i < nbins; i++) {
       hElefant->SetBinContent(i, N4/norm*hdat[i]);
@@ -201,18 +206,22 @@ int PDFs() {
   //------------------------------------------------------------------------
 
   // finally, draw everything
-  TCanvas* c = new TCanvas("c","Canvas",0, 0, 1200, 800);
+  TCanvas* c = new TCanvas("c","Canvas",0, 0, 1920, 1080);
   c->Divide(2,2);
   c->cd(1);
+  h100->SetFillColor(18);
   h100->DrawCopy();
   f100->Draw("same");
   c->cd(2);
+  h200->SetFillColor(18);
   h200->DrawCopy();
   f200->Draw("same");
   c->cd(3);
+  h300->SetFillColor(18);
   h300->DrawCopy();
   f300->Draw("same");
   c->cd(4);
+  h400->SetFillColor(18);
   h400->DrawCopy();
   hElefant->SetLineColor(kRed);
   hElefant->Draw("same");
