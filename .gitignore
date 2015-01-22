@@ -4,3 +4,9 @@ material/
 
 # generierte Plots
 genplot-*
+
+# von ROOT generierte Datenfiles
+*.root
+
+# kompilierter C++-Code
+*.o
