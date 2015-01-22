@@ -129,7 +129,7 @@ void PDFs() {
     TH1F *h200 = new TH1F("h200", "cauchy distribution", 50, -10, 10);
 
     for(int i = 0; i < 10000; i++) {
-        h200->Fill(-1./TMath::Tan(pi*gRandom->Rndm()));
+        h200->Fill(1./TMath::Tan(pi*gRandom->Rndm() - 1./2.));
     }
 
     TF1 *f200 = new TF1("cauchy", cauchyDistribution, -10, 10, 1);
