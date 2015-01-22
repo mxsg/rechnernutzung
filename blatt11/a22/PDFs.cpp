@@ -57,15 +57,15 @@ void AcceptReject (TH1F *histo, Double_t (*f)(Double_t x, Double_t p), Double_t 
     int i = 0;
     while(i < NumRand) {
         // generate (uniform) random numbers in interval (xmin, xmax)
-		Double_t rand = gRandom->Uniform(xmin, xmax);
+        Double_t rand = gRandom->Uniform(xmin, xmax);
 
-		// transform with function t, do not transform if null pointer is passed
-		if(t != nullptr) rand = t(rand);
+        // transform with function t, do not transform if null pointer is passed
+        if(t != nullptr) rand = t(rand);
 
-		// accept generated number with probability f(rand, p)
+        // accept generated number with probability f(rand, p)
         if(gRandom->Rndm() < f(rand, p)) {
-			// number has been accepted, put into histogram
-			// and increment count for accepted numbers
+            // number has been accepted, put into histogram
+            // and increment count for accepted numbers
             histo->Fill(rand);
             i++;
         }
