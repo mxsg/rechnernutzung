@@ -193,9 +193,9 @@ int PiMonteCarlo () {
     // create legend
     TLegend leg(0.1, 0.1, 0.4, 0.35);
 
-    char legend[30];
+    char legend[50];
     for(int i = 0; i < lengthSteps; i++) {
-        sprintf(legend, "Buffon Method with %i/%i x L", i+1, lengthSteps);
+        sprintf(legend, "Buffon Method with l = %i/%i x a", i+1, lengthSteps);
         leg.AddEntry(myGraphArray[i], legend);
     }
     leg.AddEntry(myGraphArray[lengthSteps], "Alternative Method");
