@@ -50,10 +50,11 @@ all: $(SOURCE) $(SOURCE)_lsg
 #------------------------------------------------------------------------------
 # Template
 $(SOURCE).o: $(SOURCE).cpp
-	$(CXX) $(CXXFLAGS) -c $(SOURCE).cpp -o $(SOURCE).o
+	mkdir -p bin
+	$(CXX) $(CXXFLAGS) -c $(SOURCE).cpp -o bin/$(SOURCE).o
 
 $(SOURCE): $(SOURCE).o
-	$(LD) $(LDFLAGS) $(SOURCE).o $(LIBS) -o $(SOURCE)
+	$(LD) $(LDFLAGS) bin/$(SOURCE).o $(LIBS) -o bin/$(SOURCE)
 
 #------------------------------------------------------------------------------
 # Solution
@@ -65,5 +66,6 @@ $(SOURCE)_lsg: $(SOURCE)_lsg.o
 
 #------------------------------------------------------------------------------
 #clean up
+# was before: @rm -f *.o core
 clean:
-		@rm -f *.o core
+	@rm -rf bin

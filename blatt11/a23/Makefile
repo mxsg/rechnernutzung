@@ -50,10 +50,11 @@ default : $(SOURCE)
 #------------------------------------------------------------------------------
 # Template
 $(SOURCE).o: $(SOURCE).cpp
-	$(CXX) $(CXXFLAGS) -c $(SOURCE).cpp -o $(SOURCE).o
+	mkdir -p bin
+	$(CXX) $(CXXFLAGS) -c $(SOURCE).cpp -o bin/$(SOURCE).o
 
 $(SOURCE): $(SOURCE).o
-	$(LD) $(LDFLAGS) $(SOURCE).o $(LIBS) -o $(SOURCE)	
+	$(LD) $(LDFLAGS) bin/$(SOURCE).o $(LIBS) -o bin/$(SOURCE)
 
 #------------------------------------------------------------------------------
 # Solution
@@ -66,4 +67,4 @@ $(SOURCE): $(SOURCE).o
 #------------------------------------------------------------------------------
 #clean up
 clean:
-		@rm -f *.o core
+	@rm -rf bin
