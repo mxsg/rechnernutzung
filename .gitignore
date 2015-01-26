@@ -9,4 +9,4 @@ genplot-*
 *.root
 
 # kompilierter C++-Code
-*.o
+bin/
