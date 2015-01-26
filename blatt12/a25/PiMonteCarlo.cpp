@@ -37,8 +37,8 @@ double buffon(int N, double needleLength) {
         double yDist = gRandom->Rndm();
         // angle between lines and needle
         // because of symmetry, it is sufficient to
-        // consider angles in the interval [0, Pi/2]
-        double angle = gRandom->Uniform(TMath::Pi()/2);
+        // consider angles in the interval [0, Pi]
+        double angle = gRandom->Uniform(TMath::Pi());
         // length of the vertical projection of the needle
         double yLen =
             needleLength*TMath::Sin(angle);
