@@ -88,7 +88,7 @@ int PiMonteCarlo () {
     std::cout << "Alternative Method says: " << std::endl;
     std::cout << alternative(N) << std::endl;
 
-    // Make a double logarithmic plot to estimate the speed of conversion.
+    // Make a double logarithmic plot to estimate the speed of convergence.
     // Unfortunately it turns out the differences are quite small,
     // except for extreme needle length. One method is clearly better than the other.
 
