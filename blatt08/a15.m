@@ -112,4 +112,4 @@ points = Flatten[Table[{i, zeros[[i, j]]}, {i, 1, nmax}, {j, 1, i}], 1]
 
 
 (* bestimmte Nullstellen plotten *)
-ListPlot[points, AxesOrigin->{0,0}]
+ListPlot[points, AxesOrigin->{0,0}, AxesLabel->{k, "Nullstellen von" Subscript[Q, k]}]
